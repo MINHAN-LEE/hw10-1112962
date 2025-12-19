@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>1112962 -HW10</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">●</div>
+      <div>
+        <div class="title">1112962 -HW10</div>
+        <div class="subtitle">Othello 黑白棋（玩家黑先手 / 電腦白後手）</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="control">
+        <label for="difficulty">電腦棋力</label>
+        <select id="difficulty">
+          <option value="basic">基本棋力（Greedy + Corner）</option>
+          <option value="advanced" selected>進階棋力（Minimax + Alpha-Beta）</option>
+        </select>
+      </div>
+
+      <div class="control">
+        <label for="showHints">提示</label>
+        <select id="showHints">
+          <option value="on" selected>顯示合法落點</option>
+          <option value="off">關閉</option>
+        </select>
+      </div>
+
+      <button id="btnNew" class="btn primary" type="button">新局</button>
+      <button id="btnUndo" class="btn" type="button" title="回到上一手（只保留最近一步）">悔棋</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel">
+      <div class="scoreRow">
+        <div class="pill">
+          <span class="dot black"></span>
+          玩家（黑）<b id="scoreBlack">2</b>
+        </div>
+        <div class="pill">
+          <span class="dot white"></span>
+          電腦（白）<b id="scoreWhite">2</b>
+        </div>
+      </div>
+
+      <div id="status" class="status">輪到：玩家（黑）</div>
+
+      <div class="tips">
+        <div class="tip"><b>基本棋力：</b>優先角落 → 最大翻子數 → 位置權重。</div>
+        <div class="tip"><b>進階棋力：</b>Minimax + Alpha-Beta（含角落/行動力/位置權重評估）。</div>
+        <div class="tip"><b>現場檢視 UI：</b>立體棋子、翻棋動畫、依序翻棋（逐顆翻）。</div>
+      </div>
+    </section>
+
+    <section class="boardWrap">
+      <div class="boardHeader">
+        <div class="legend">
+          <span class="chip">點擊棋盤下子</span>
+          <span class="chip">合法落點會顯示小點</span>
+          <span class="chip">翻棋會逐顆翻轉</span>
+        </div>
+        <div class="right">
+          <div id="thinking" class="thinking" hidden>電腦思考中…</div>
+        </div>
+      </div>
+
+      <div id="board" class="board" role="grid" aria-label="Othello board"></div>
+
+      <div class="footer">
+        <div class="small">
+          建議：進階棋力在電腦較慢時，改用「基本棋力」或重新整理頁面。
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="dlgOver" class="dlg">
+    <div class="dlgCard">
+      <div class="dlgTitle">遊戲結束</div>
+      <div id="dlgMsg" class="dlgMsg"></div>
+      <div class="dlgActions">
+        <button id="btnCloseDlg" class="btn">關閉</button>
+        <button id="btnNew2" class="btn primary">再來一局</button>
+      </div>
+    </div>
+  </dialog>
+
+  <footer class="credits">
+    <span>Made for HW10 • Pure HTML/CSS/JS • GitHub Pages Ready</span>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
